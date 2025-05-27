@@ -16,3 +16,273 @@
   background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
 } */
 
+.checkered-bg {
+  min-height: 100vh;
+  background-color: #000;
+  background-image:
+    linear-gradient(45deg, #fff 25%, transparent 25%),
+    linear-gradient(-45deg, #fff 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #fff 75%),
+    linear-gradient(-45deg, transparent 75%, #fff 75%);
+  background-size: 40px 40px;
+  background-position:
+    0 0,
+    0 20px,
+    20px -20px,
+    -20px 0px;
+  padding: 40px 5%;
+}
+
+
+.content-box {
+  background-color: white;
+  border: 3px solid #00ffaa;
+  border-radius: 12px;
+  width: 90%; /* Flexible width for mobile */
+  max-width: 1900px; /* Max width for larger screens */
+  margin: 0 auto; /* Center horizontally */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.account-btn {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.nav-bar {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #333; /* dark grey background */
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.nav-bar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between; /* This will distribute items evenly */
+  width: 100%; /* Ensure the ul takes full width */
+}
+
+.nav-bar li {
+  flex: 1; /* This makes each li take equal space */
+  text-align: center; /* Center the text within each li */
+}
+
+.nav-bar li a {
+  text-decoration: none;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+  display: block; /* Make the anchor fill the li */
+}
+
+.nav-bar li a:hover {
+  background-color: #2c3e50; /* dark blueish grey on hover */
+}
+
+.hero-title {
+  font-family: 'Arial', sans-serif; /* Sans-serif font */
+  font-size: 3rem;
+  font-weight: bold;
+  color: black;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  margin: 0;
+  max-width: 60%;
+}
+
+.hero {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+  margin: 0;
+  z-index: 1;
+}
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Overlay content */
+.hero-overlay {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  max-width: 40%;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.hero-overlay h2 {
+  font-family: Arial, sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.hero-overlay p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.hero-button {
+  background-color: #000000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.hero-button:hover {
+  background-color: #005539;
+}
+
+
+.delorean-section {
+  display: flex;
+  gap: 30px;
+  margin-top: 40px;
+  flex-wrap: wrap; 
+}
+
+.delorean-upgrades,
+.delorean-reviews {
+  flex: 1;
+  min-width: 300px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.delorean-upgrades h3,
+.delorean-reviews h3 {
+  font-family: Arial, sans-serif;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+/* Upgrades section */
+.delorean-upgrades ul {
+  list-style: none;
+  padding: 0;
+}
+
+.delorean-upgrades li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.delorean-upgrades img {
+  width: 80px;
+  height: 60px;
+  background-color: #ddd; 
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+
+.review {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 4px solid #00ffaa;
+  border-radius: 6px;
+}
+
+.review p {
+  margin: 0 0 8px 0;
+  font-style: italic;
+}
+
+.review span {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+
+@media (max-width: 768px) {
+  .content-box {
+    width: 95%; 
+    min-width: 300px; 
+    padding: 15px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-overlay {
+    position: static;
+    max-width: 100%;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: none;
+  }
+
+  .hero-title {
+    max-width: 100%;
+    font-size: 2rem;
+  }
+
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

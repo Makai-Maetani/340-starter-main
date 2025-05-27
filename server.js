@@ -6,10 +6,12 @@
  * Require Statements
  *************************/
 const express = require("express")
+const baseController = require("./controllers/baseController")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
+app.use(express.static("public"))
 
 app.set("view engine", "ejs")
 app.use(expressLayouts)
@@ -22,23 +24,40 @@ app.use(static)
 
 app.use(require("./routes/static"))
 //index route
-app.get("/", function (req, res){
-  res.render("index", {title: "Home"})
-})
-// app.get("/", (req, res) => {
-//   res.send("welcome home!")
+
+app.get("/", baseController.buildHome)
+// Inventory routes
+
+//New Commet
+// app.use("/inv", inventoryRoute)
+
+
+/* ***********************
+* Express Error Handler
+* Place after all other middleware
+*************************/
+// app.use(async (err, req, res, next) => {
+//   let nav = await utilities.getNav()
+//   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+//   res.render("errors/error", {
+//     title: err.status || 'Server Error',
+//     message: err.message,
+//     nav
+//   })
 // })
 
-// app.get("/", (req, res) => {
-//   res.render("layout.ejs")
+
+// // File Not Found Route - must be last route in list
+// app.use(async (req, res, next) => {
+//   next({status: 404, message: 'Sorry, we appear to have lost that page. TEST1234'})
 // })
 
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
  *************************/
- const port = process.env.PORT
- const host = process.env.HOST
+ const port = process.env.PORT || 3000;
+ const host = process.env.HOST || 3000;
 // const port = "3000"
 // const host = "localhost"
 

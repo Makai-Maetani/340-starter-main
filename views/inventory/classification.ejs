@@ -1,0 +1,13 @@
+<!-- Content Head -->
+
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!-- Outsourced Message -->
+<%# messages() %>
+
+<!-- Inventory Items -->
+ <%- grid %>
