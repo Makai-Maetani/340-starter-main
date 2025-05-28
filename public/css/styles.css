@@ -198,6 +198,9 @@
   gap: 30px;
   margin-top: 40px;
   flex-wrap: wrap; 
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  color: black;
 }
 
 .delorean-upgrades,
@@ -233,27 +236,36 @@
 .delorean-upgrades img {
   width: 80px;
   height: 60px;
-  background-color: #ddd; 
+ 
   object-fit: cover;
   border-radius: 6px;
 }
 
 
 .review {
-  background-color: #fff;
   padding: 15px;
   margin-bottom: 15px;
   border-left: 4px solid #00ffaa;
   border-radius: 6px;
+  font-family: Arial, sans-serif;
 }
 
 .review p {
   margin: 0 0 8px 0;
+   font-family: Arial, sans-serif;
+   font-size: 1.2rem;
   font-style: italic;
 }
 
 .review span {
-  font-size: 0.9rem;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  color: black;
+}
+
+.copyright {
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
   color: black;
 }
 
