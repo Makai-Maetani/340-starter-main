@@ -1,23 +1,22 @@
-// const express = require('express');
-// const router = express.Router();
+// routes/static.js
+const express = require("express");
+const router = express.Router();
 
-// // Static Routes
-// // Set up "public" folder / subfolders for static files
-// router.use(express.static("public"));
-// router.use("/css", express.static(__dirname + "public/css"));
-// router.use("/js", express.static(__dirname + "public/js"));
-// router.use("/images", express.static(__dirname + "public/images"));
-
-// module.exports = router;
-
-
-const express = require("express")
-const router = express.Router()
-
-// Example route (optional)
+// Static routes
 router.get("/about", (req, res) => {
-  res.render("about", { title: "About Us" })
-})
+  res.render("about", { title: "About Us" });
+});
 
-module.exports = router
+router.get("/account", (req, res) => {
+  res.render("partials/logBody", { title: "Sign In" });
+});
 
+router.get("/signup", (req, res) => {
+  res.render("partials/signupBody", { title: "Sign Up" });
+});
+
+router.get("/testError", (req, res) => {
+  throw new Error("This is a test 500 error.");
+});
+
+module.exports = router;

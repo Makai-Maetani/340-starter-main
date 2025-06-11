@@ -1,0 +1,5 @@
+Host: 143.198.247.195
+Port: 5432
+Database: Cse 341 TTO
+Username: maetani69078
+Password: 419369078
