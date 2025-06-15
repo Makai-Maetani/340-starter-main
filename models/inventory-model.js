@@ -43,10 +43,24 @@ async function getVehicleById(inv_id) {
   }
 }
 
+async function getInventory() {
+  try {
+    const result = await pool.query(
+      `SELECT * FROM inventory i
+       JOIN classification c ON i.classification_id = c.classification_id
+       ORDER BY i.inv_make`
+    )
+    return result.rows
+  } catch (error) {
+    console.error("getInventory error:", error)
+    throw error
+  }
+}
 
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
   getInventoryByClassificationName,
-   getVehicleById 
+   getVehicleById,
+     getInventory
 }

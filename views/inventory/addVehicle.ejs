@@ -1,0 +1,70 @@
+<% title = 'Add Vehicle' %>
+
+<form class="vehicle-form" method="POST" action="/inv/add" novalidate>
+  <% if (errors && errors.length) { %>
+    <ul class="form-errors">
+      <% errors.forEach(e => { %>
+        <li><%= e.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <div class="form-group">
+    <label for="inv_make">Make</label>
+    <input id="inv_make" type="text" name="inv_make" value="<%= data?.inv_make || '' %>" required minlength="3">
+  </div>
+
+  <div class="form-group">
+    <label for="inv_model">Model</label>
+    <input id="inv_model" type="text" name="inv_model" value="<%= data?.inv_model || '' %>" required minlength="3">
+  </div>
+
+  <div class="form-group">
+    <label for="inv_year">Year</label>
+    <input id="inv_year" type="number" name="inv_year" value="<%= data?.inv_year || '' %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="inv_description">Description</label>
+    <textarea id="inv_description" name="inv_description" required><%= data?.inv_description || '' %></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="inv_image">Image Path</label>
+    <input id="inv_image" type="text" name="inv_image" value="<%= data?.inv_image || '' %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="inv_thumbnail">Thumbnail Image Path</label>
+    <input id="inv_thumbnail" type="text" name="inv_thumbnail" value="<%= data?.inv_thumbnail || '' %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="inv_price">Price</label>
+    <input id="inv_price" type="number" name="inv_price" step="0.01" value="<%= data?.inv_price || '' %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="inv_miles">Miles</label>
+    <input id="inv_miles" type="number" name="inv_miles" value="<%= data?.inv_miles || '' %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="inv_color">Color</label>
+    <input id="inv_color" type="text" name="inv_color" value="<%= data?.inv_color || '' %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="classification_id">Classification</label>
+    <select id="classification_id" name="classification_id" required>
+      <option value="">--Select--</option>
+      <% classifications.forEach(c => { %>
+        <option value="<%= c.classification_id %>" <%= data?.classification_id == c.classification_id ? "selected" : "" %> >
+          <%= c.classification_name %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <button type="submit" class="btn">Add Vehicle</button>
+</form>

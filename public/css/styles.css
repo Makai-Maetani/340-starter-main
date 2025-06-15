@@ -469,6 +469,40 @@
   width: 100px;
 }
 
+.vehicle-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 40px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input:invalid {
+  border: 2px solid red;
+}
+
+.form-group input:valid {
+  border: 2px solid green;
+}
+
+.form-errors {
+  background: #ffe0e0;
+  padding: 15px;
+  border-radius: 8px;
+  color: red;
+  margin-bottom: 20px;
+  list-style-type: disc;
+  padding-left: 40px;
+}
+
+
 @media (max-width: 768px) {
   .vehicle-detail {
     flex-direction: column;

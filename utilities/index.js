@@ -1,69 +1,26 @@
-//IDK
+const { Pool } = require("pg")
+require("dotenv").config()
 
+const isDev = process.env.NODE_ENV === "development"
 
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: isDev ? false : { rejectUnauthorized: false }, // for Render or Heroku
+})
 
-
-// const invModel = require("../models/inventory-model")
-// const Util = {}
-
-// /* ************************
-//  * Constructs the nav HTML unordered list
-//  ************************** */
-// Util.getNav = async function (req, res, next) {
-//   let data = await invModel.getClassifications()
-//   let list = "<ul>"
-//   list += '<li><a href="/" title="Home page">Home</a></li>'
-//   data.rows.forEach((row) => {
-//     list += "<li>"
-//     list +=
-//       '<a href="/inv/type/' +
-//       row.classification_id +
-//       '" title="See our inventory of ' +
-//       row.classification_name +
-//       ' vehicles">' +
-//       row.classification_name +
-//       "</a>"
-//     list += "</li>"
-//   })
-//   list += "</ul>"
-//   return list
-// }
-
-// module.exports = Util
-
-// router.get("/type/:classificationId", invController.buildByClassificationId);
-
-// module.exports = router;
-
-// /* **************************************
-// * Build the classification view HTML
-// * ************************************ */
-// Util.buildClassificationGrid = async function(data){
-//   let grid
-//   if(data.length > 0){
-//     grid = '<ul id="inv-display">'
-//     data.forEach(vehicle => { 
-//       grid += '<li>'
-//       grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-//       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-//       + 'details"><img src="' + vehicle.inv_thumbnail 
-//       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-//       +' on CSE Motors" /></a>'
-//       grid += '<div class="namePrice">'
-//       grid += '<hr />'
-//       grid += '<h2>'
-//       grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
-//       + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
-//       + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
-//       grid += '</h2>'
-//       grid += '<span>$' 
-//       + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
-//       grid += '</div>'
-//       grid += '</li>'
-//     })
-//     grid += '</ul>'
-//   } else { 
-//     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
-//   }
-//   return grid
-// }
+if (isDev) {
+  module.exports = {
+    async query(text, params) {
+      try {
+        const res = await pool.query(text, params)
+        console.log("executed query", { text })
+        return res
+      } catch (error) {
+        console.error("query error", { text, error })
+        throw error
+      }
+    }
+  }
+} else {
+  module.exports = pool
+}
