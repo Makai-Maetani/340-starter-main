@@ -1,0 +1,56 @@
+<div class="body-container">
+  <h1><%= title %></h1>
+
+  <!-- Display Errors -->
+  <% if (errors && errors.length > 0) { %>
+    <ul class="form-errors">
+      <% errors.forEach(function(error) { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <!-- Display Success Message -->
+  <% if (success) { %>
+    <p class="form-success"><%= success %></p>
+  <% } %>
+
+  <!-- === Account Update Form === -->
+  <form action="/update" method="POST">
+    <h2>Account Update</h2>
+
+    <input type="hidden" name="account_id" value="<%= data.account_id || '' %>">
+
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" value="<%= data.firstName || '' %>" required>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" value="<%= data.lastName || '' %>" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" value="<%= data.email || '' %>" required>
+    </div>
+
+    <button type="submit" class="btn">Update Account</button>
+  </form>
+
+  <!-- === Change Password Form === -->
+  <form action="/update-password" method="POST">
+    <h2>Change Password</h2>
+
+    <input type="hidden" name="account_id" value="<%= data.account_id || '' %>">
+
+    <div class="form-group">
+      <label for="newPassword">New Password</label>
+      <input type="password" id="newPassword" name="newPassword" required>
+      <p>Password must be at least 6 characters.</p>
+    </div>
+
+    <button type="submit" class="btn">Change Password</button>
+  </form>
+</div>

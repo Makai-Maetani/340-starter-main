@@ -145,4 +145,119 @@ invController.handleAddForm = [
   }
 ]
 
+invController.showMaintenancePage = async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM inventory ORDER BY inv_make, inv_model");
+    res.render("inventory/vehicle-maintenance", {
+      title: "Vehicle Maintenance",
+      vehicles: result.rows,
+      nav: res.locals.nav,
+      layout: "./layouts/layout"
+    });
+  } catch (err) {
+    console.error("Error loading maintenance page:", err);
+    res.status(500).send("Server error");
+  }
+};
+
+// ===== Show Edit Vehicle Form =====
+invController.showEditForm = async (req, res) => {
+  const inv_id = req.params.inv_id;
+  try {
+    const [vehicleResult, classificationResult] = await Promise.all([
+      pool.query("SELECT * FROM inventory WHERE inv_id = $1", [inv_id]),
+      pool.query("SELECT * FROM classification")
+    ]);
+
+    const vehicle = vehicleResult.rows[0];
+    if (!vehicle) return res.status(404).send("Vehicle not found");
+
+    res.render("inventory/editVehicle", {
+      title: "Edit Vehicle",
+      vehicle,
+      classifications: classificationResult.rows,
+      errors: [],
+      layout: "./layouts/layout"
+    });
+  } catch (err) {
+    console.error("Edit form error:", err);
+    res.status(500).send("Server error");
+  }
+};
+
+// ===== Handle Edit Form Submission =====
+invController.handleEditForm = [
+  // Validation (same as add)
+  body("inv_make").isLength({ min: 3 }).withMessage("Make must be at least 3 characters"),
+  body("inv_model").isLength({ min: 3 }).withMessage("Model must be at least 3 characters"),
+  body("inv_year").isInt({ min: 1886 }).withMessage("Enter a valid year"),
+  body("inv_miles").isInt({ min: 0 }).withMessage("Miles must be a positive number"),
+  body("inv_price").isFloat({ min: 0 }).withMessage("Price must be positive"),
+  body("inv_color").notEmpty().withMessage("Color is required"),
+  body("inv_description").notEmpty().withMessage("Description is required"),
+  body("inv_image").notEmpty().withMessage("Image URL is required"),
+  body("inv_thumbnail").notEmpty().withMessage("Thumbnail path is required"),
+  body("classification_id").isInt().withMessage("Choose a classification"),
+
+  async (req, res) => {
+    const errors = validationResult(req);
+    const data = req.body;
+    const inv_id = req.params.inv_id;
+
+    if (!errors.isEmpty()) {
+      const classificationResult = await pool.query("SELECT * FROM classification");
+      return res.render("inventory/editVehicle", {
+        title: "Edit Vehicle",
+        vehicle: { ...data, inv_id },
+        classifications: classificationResult.rows,
+        errors: errors.array(),
+        layout: "./layouts/layout"
+      });
+    }
+
+    try {
+      const query = `
+        UPDATE inventory SET
+          inv_make = $1, inv_model = $2, inv_year = $3,
+          inv_description = $4, inv_image = $5, inv_thumbnail = $6,
+          inv_price = $7, inv_miles = $8, inv_color = $9, classification_id = $10
+        WHERE inv_id = $11
+      `;
+
+      const values = [
+        data.inv_make,
+        data.inv_model,
+        data.inv_year,
+        data.inv_description,
+        data.inv_image,
+        data.inv_thumbnail,
+        data.inv_price,
+        data.inv_miles,
+        data.inv_color,
+        data.classification_id,
+        inv_id
+      ];
+
+      await pool.query(query, values);
+      res.redirect("/inv/maintenance");
+    } catch (err) {
+      console.error("Update error:", err);
+      res.status(500).send("Database update failed");
+    }
+  }
+];
+
+// ===== Handle Vehicle Deletion =====
+invController.deleteVehicle = async (req, res) => {
+  const inv_id = req.params.inv_id;
+  try {
+    await pool.query("DELETE FROM inventory WHERE inv_id = $1", [inv_id]);
+    res.redirect("/inv/maintenance");
+  } catch (err) {
+    console.error("Delete error:", err);
+    res.status(500).send("Delete failed");
+  }
+};
+
+
 module.exports = invController

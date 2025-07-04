@@ -11,8 +11,10 @@ router.get("/account", (req, res) => {
   res.render("partials/logBody", { title: "Sign In" });
 });
 
-router.get("/signup", (req, res) => {
-  res.render("partials/signupBody", { title: "Sign Up" });
+
+
+router.get("/account", (req, res) => {
+  res.redirect("/account/login");
 });
 
 router.get("/testError", (req, res) => {

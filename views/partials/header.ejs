@@ -1,7 +1,15 @@
 <header class="header">
   <h1>CSE Motors</h1>
-  <a href="/account">Account</a>
 
+  <% if (typeof account !== 'undefined' && account) { %>
+    <div class="account-info">
+      Welcome, <%= account.firstName %> |
+      <a href="/update">Account Management</a> |
+      <a href="/logout">Logout</a>
+    </div>
+  <% } else { %>
+    <div class="account-info">
+      <a href="/login">My Account</a>
+    </div>
+  <% } %>
 </header>
-
-

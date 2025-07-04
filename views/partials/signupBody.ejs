@@ -1,27 +1,53 @@
 <div class="body-container">
   <div class="signup-container">
     <h2>Create Account</h2>
+
+    <% if (errors.length > 0) { %>
+      <ul class="form-errors">
+        <% errors.forEach(function(error) { %>
+          <li><%= error.msg %></li>
+        <% }); %>
+      </ul>
+    <% } %>
+
+    <% if (success) { %>
+      <p style="color: green;"><%= success %></p>
+    <% } %>
+
     <form action="/signup" method="POST">
       <div class="form-group">
         <label for="firstName">First Name</label>
-        <input type="text" id="firstName" name="firstName" required />
+        <input type="text" id="firstName" name="firstName" value="<%= data.firstName || '' %>" required />
       </div>
       <div class="form-group">
         <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" name="lastName" required />
+        <input type="text" id="lastName" name="lastName" value="<%= data.lastName || '' %>" required />
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
+        <input type="email" id="email" name="email" value="<%= data.email || '' %>" required />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" id="password" name="password" required />
       </div>
+
+      <!-- Optional: Account Type - Disabled for frontend use -->
+      <!-- <div class="form-group">
+        <label for="account_type">Account Type (for testing only)</label>
+        <select id="account_type" name="account_type">
+          <option value="Client">Client</option>
+          <option value="Employee">Employee</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div> -->
+     
+
       <button type="submit" class="btn">Sign Up</button>
     </form>
+
     <div class="signin-link">
-      Already have an account? <a href="/account">Sign In</a>
+      Already have an account? <a href="/login">Sign In</a>
     </div>
   </div>
 </div>
