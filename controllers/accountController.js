@@ -117,7 +117,8 @@ accountController.handleLogin = async (req, res) => {
         id: account.account_id,
         firstName: account.account_firstname,
         lastName: account.account_lastname,
-        email: account.account_email
+        email: account.account_email,
+        type: account.account_type
       };
       
       // ===== Generate JWT Token =====

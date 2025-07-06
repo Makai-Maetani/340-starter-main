@@ -3,7 +3,13 @@
 
   <% if (typeof account !== 'undefined' && account) { %>
     <div class="account-info">
-      Welcome, <%= account.firstName %> |
+      <% if (account.type === 'Employee') { %>
+        <h2>EMPLOYEE - <%= account.firstName %></h2>
+      <% } else if (account.type === 'Admin') { %>
+        <h2>ADMIN - <%= account.firstName %></h2>
+      <% } else { %>
+        Welcome, <%= account.firstName %>
+      <% } %> |
       <a href="/update">Account Management</a> |
       <a href="/logout">Logout</a>
     </div>
